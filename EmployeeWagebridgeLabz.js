@@ -1,4 +1,4 @@
-//UC7
+//UC8
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
@@ -6,6 +6,7 @@ const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
 const NUM_OF_WORKING_DAYS = 20;
 const MAX_HOURS_IN_MONTH = 160;
+let employeeDailyWageMap = new Map();
 // function getWorkingHours(employeeCheck){
 //     switch (employeeCheck) {
 //         case IS_PART_TIME:
@@ -83,12 +84,13 @@ while (totalEmployeeHours <= MAX_HOURS_IN_MONTH && totalWorkingDays < NUM_OF_WOR
     let empHrs = getWorkingHours(employeeCheck);
     totalEmployeeHours += empHrs;
     employeeDailyWageArray.push(calculateDailyWage(empHrs));
+    employeeDailyWageMap.set(totalWorkingDays, calculateDailyWage(empHrs));
 }
 console.log("employeeWageArray = "+employeeDailyWageArray);
 let totalEmployeeWage = calculateDailyWage(totalEmployeeHours);
 console.log("\nTotal Working Days = " + totalWorkingDays + "\nTotal Working Hours = " + totalEmployeeHours + "\nTotal Employee Wage = " + totalEmployeeWage);
 
-//Use Case - 7A
+//UC - 7A
 //Calculating Total Employee Wage Using ForEach
 employeeDailyWageArray.forEach(totalWage);
 console.log("\nTotal Working Days = " + totalWorkingDays + "\nTotal Working Hours = " + totalEmployeeHours + "\nTotal Employee Wage = " + totalEmployeeWage);
@@ -96,33 +98,36 @@ console.log("\nTotal Working Days = " + totalWorkingDays + "\nTotal Working Hour
 //Calculating Total Employee Wage Using Reduce
 console.log("Employee Wage With Reduce : " + employeeDailyWageArray.reduce(totalWageUsingReduce, 0));
 
-//Use Case - 7B
+//UC - 7B
 //Print day along with daily wage
 let mapDayWithWageArray = employeeDailyWageArray.map(mapDayWithDailyWage);
 console.log("Daily Wage Map : "+mapDayWithWageArray);
 
-//Use Case - 7C
+//UC - 7C
 //Show days when full time Wage of 160 is earned
 let fullDayWageArray = mapDayWithWageArray.filter(fullTimeWage);
 console.log("Daily Wage Filter When Full Time Wage Earned : ");
 console.log(fullDayWageArray);
 
-//Use Case - 7D
+//UC - 7D
 //Find first occurence when full time wage was eared using find function
 console.log("First Full Time Wage was Earned on Day : " + mapDayWithWageArray.find(findFullTimeWage));
 
-//Use Case - 7E
+//UC - 7E
 //Check if every element of full time wage is truely holding full time wage
 console.log("Check All Element Have Full Time Wage: " + fullDayWageArray.every(isAllFullTimeWage));
-//Use Case - 7F
+//UC - 7F
 //Check if ther eis any Part Time Wages
 console.log("Check If Any Part Time Wage: " + mapDayWithWageArray.some(isAnyPartTimeWage));
 
-//Use Case - 7G
+//UC - 7G
 //Find Number of days the Employee Worked
 function totalDaysWorked(numberOfDays, dailyWage){
     if(dailyWage > 0)
         return numberOfDays + 1;
     return numberOfDays;
 }
-console.log("Numbe rof Days the Employee has Worked = " + employeeDailyWageArray.reduce(totalDaysWorked, 0));
+console.log("Numbe of Days the Employee has Worked = " + employeeDailyWageArray.reduce(totalDaysWorked, 0));
+//UC - 8
+console.log(employeeDailyWageMap);
+console.log("Employee Wage Map : \nTotal Wage : " + Array.from(employeeDailyWageMap.values()).reduce(totalWageUsingReduce, 0));
