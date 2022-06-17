@@ -1,4 +1,4 @@
-//UC8
+//UC10
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
@@ -6,8 +6,7 @@ const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
 const NUM_OF_WORKING_DAYS = 20;
 const MAX_HOURS_IN_MONTH = 160;
-let employeeDailyWageMap = new Map();
-let employeeDailyHoursMap = new Map();
+
 // function getWorkingHours(employeeCheck){
 //     switch (employeeCheck) {
 //         case IS_PART_TIME:
@@ -50,9 +49,7 @@ function calculateDailyWage(employeeHours) {
     return employeeHours * WAGE_PER_HOUR
 }
 
-function totalWage(dailyWage){
-    totalEmployeeWage += dailyWage;
-}
+/*
 
 function totalWageUsingReduce(totalWage, dailyWage){
     return totalWage + dailyWage;
@@ -79,6 +76,13 @@ function isAnyPartTimeWage(dailyWage){
     return dailyWage.includes("80");
 }
 
+//openblock
+{
+    function totalWage(dailyWage){
+        totalEmployeeWage += dailyWage;
+    }    
+    let employeeDailyWageMap = new Map();
+    let employeeDailyHoursMap = new Map();
 while (totalEmployeeHours <= MAX_HOURS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
     let employeeCheck = Math.floor(Math.random() * 10) % 3;
@@ -158,3 +162,31 @@ employeeDailyHoursMap.forEach((value, key) => {
 console.log("Full Working Days : " + fullTimeWorkingDays);
 console.log("Part Working Days : " + partTimeWorkingDays);
 console.log("Non Working Days : " + nonWorkingDays);
+
+}//closeblock
+*/
+//UC - 10
+let employeeDailyWageAndHoursArray = new Array();
+
+while (totalEmployeeHours <= MAX_HOURS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+    totalWorkingDays++;
+    let employeeCheck = Math.floor(Math.random() * 10) % 3;
+    let employeeHours = getWorkingHours(employeeCheck);
+    totalEmployeeHours += employeeHours;
+    employeeDailyWageAndHoursArray.push(
+        {
+
+            dayNumber: totalWorkingDays,
+            dailyHours: employeeHours,
+            dailyWage: calculateDailyWage(employeeHours),
+            toString() {
+                return "\nDay" + this.dayNumber + " => Working Hours = " + this.dailyHours + " And Wage Earned = " + this.dailyWage
+            },
+        });
+}
+
+console.log("\nShowing Daily Wages and Hours Worked Using Objects : " + employeeDailyWageAndHoursArray);
+//console.log(employeeDailyWageAndHoursArray);
+
+
+
