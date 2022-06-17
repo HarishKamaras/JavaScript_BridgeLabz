@@ -133,7 +133,7 @@ console.log("Numbe of Days the Employee has Worked = " + employeeDailyWageArray.
 //UC - 8
 console.log(employeeDailyWageMap);
 console.log("Employee Wage Map : \nTotal Wage : " + Array.from(employeeDailyWageMap.values()).reduce(totalWageUsingReduce, 0));
-//USe Case - 9
+//UC - 9
 const findTotal = (totalValue, dailyValue) => {
     return totalValue + dailyValue;
 }
